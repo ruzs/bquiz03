@@ -34,8 +34,3 @@ foreach ($rows as $key => $row) {
   <?php
 }
 ?>
-
-<script>
-
-
-</script>
