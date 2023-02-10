@@ -23,9 +23,16 @@
     margin: auto;
   }
 
-  .seats div {
+  .seats>div {
     width: 20%;
     height: calc(340px / 4);
+    position: relative;
+  }
+
+  .seats input[type='checkbox'] {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
   }
 
   .null-seat {
@@ -42,6 +49,10 @@
     <?php
     for ($i = 0; $i < 20; $i++) {
       echo "<div class='null-seat'>";
+      echo "<div>";
+      echo (floor($i / 5) + 1) . "排" . ($i % 5 + 1) . "號";
+      echo "</div>";
+      echo "<input type='checkbox' value='$i'>";
       echo "</div>";
     }
     ?>
