@@ -9,7 +9,8 @@
     width: 210px;
     height: 280px;
     /* background-color: white; */
-    margin-left: 105px; /*讓海報維持在中間 */
+    margin-left: 105px;
+    /*讓海報維持在中間 */
     position: absolute;
     text-align: center;
     display: none;
@@ -32,7 +33,8 @@
     bottom: 0;
   }
 
-  .left,.right {
+  .left,
+  .right {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
   }
@@ -50,17 +52,20 @@
     /* background: green; */
     height: 100px;
     display: flex;
-    overflow: hidden; /*讓超過四個元件寬度的其他內容隱蔵 */
+    overflow: hidden;
+    /*讓超過四個元件寬度的其他內容隱蔵 */
   }
 
   .btn {
     width: 80px;
     font-size: 12px;
     text-align: center;
-    flex-shrink: 0;   /*讓子元素維持自己的寬度 */
-    box-sizing: border-box;  /*讓元件總寬度不受padding影嚮 */
-    padding:3px;
-    position:relative;
+    flex-shrink: 0;
+    /*讓子元素維持自己的寬度 */
+    box-sizing: border-box;
+    /*讓元件總寬度不受padding影嚮 */
+    padding: 3px;
+    position: relative;
   }
 
   .btn img {
@@ -105,20 +110,39 @@
   </div>
 </div>
 <script>
-      $(".pos").eq(0).show();
-      let btns=$(".btn").length;
-      let p=0;
-      $(".right").on("click",function(){
-        if((p+1)<=btns-4)
-          p=p+1;
-          $(".btn").css({right:80*p});
-      })
-      $(".left").on("click",function(){
-        if((p-1)>=0)
-          p=p-1;
-          $(".btn").css({right:80*p});
-      })
-    </script>
+  $(".pos").eq(0).show();
+  let btns = $(".btn").length;
+  let p = 0;
+  $(".right,.left").on("click", function() {
+
+    if ($(this).hasClass('left')) {
+      //if(p - 1 >= 0) 
+      p = (p - 1 >= 0) ? p - 1 : p;
+    } else {
+      // if(p + 1 <= btns - 4) 
+      p = (p + 1 <= btns - 4) ? p + 1 : p;
+    }
+
+    $(".btn").animate({
+      right: 80 * p
+    });
+  })
+  // $(".right").on("click", function() {
+
+  //   if ((p + 1) <= btns - 4)
+  //     p = p + 1;
+  //   $(".btn").css({
+  //     right: 80 * p
+  //   });
+  // })
+  // $(".left").on("click", function() {
+  //   if ((p - 1) >= 0)
+  //     p = p - 1;
+  //   $(".btn").css({
+  //     right: 80 * p
+  //   });
+  // })
+</script>
 <div class="half">
   <h1>院線片清單</h1>
   <div class="rb tab" style="width:95%;">
