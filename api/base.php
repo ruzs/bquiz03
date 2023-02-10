@@ -63,7 +63,7 @@ class DB{
     }
     return $this->pdo->exec($sql);
   }
-  public function count(...$arg){return $this->math('count',...$arg);}
+  public function count(...$arg){dd($arg);return $this->math('count',...$arg);}
   public function sum($col,...$arg){return $this->math('sum',$col,...$arg);}
   public function max($col,...$arg){return $this->math('max',$col,...$arg);}
   public function min($col,...$arg){return $this->math('min',$col,...$arg);}
@@ -98,7 +98,6 @@ class DB{
             $sql=$sql . $con;
         }
     }
-    // echo $sql;
     return $this->pdo->query($sql)->fetchColumn();
   }
 }
@@ -111,9 +110,8 @@ function to($url){
   header("location:".$url);
 }
 function q($sql){
-  global $pdo;
-  echo $sql;
-  return $pdo->query($sql)->fetchAll();
+  $pdo=new PDO("mysql:host=localhost;charset=utf8;dbname=db133",'root','');
+  return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
 $Trailer=new DB("trailer");
