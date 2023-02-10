@@ -26,10 +26,10 @@
   </div>
 </div>
 <div id="booking" style="display:none">
-  <div class="ct">
+  <!-- <div class="ct">
     <button onclick="$('#orderForm,#booking').toggle();$('#booking').html('')">上一步</button>
     <button>確定</button>
-  </div>
+  </div> -->
 </div>
   <script>
     getMovies();
@@ -39,6 +39,14 @@
     $("#day").on("change", function() {
       getSessions($("#movie").val(), $("#day").val());
     })
+    function getBooking(){
+    $.get("./api/get_booking.php",{},(booking)=>{
+            $("#booking").html(booking)
+            $("#selectMovie").text($("#movie option:selected").text())
+            $("#selectDate").text($("#day option:selected").text())
+            $("#selectSession").text($("#session option:selected").val())
+        })
+}
     function getMovies() {
       let params = {}
       location.href.split("?")[1].split("&").forEach(item => {
