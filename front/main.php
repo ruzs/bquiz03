@@ -138,11 +138,18 @@
   let counter = setInterval(() => {
     ani();
   }, 3000);
+  $(".btn").on("click", function() {
+    let _this = $(this).index();
 
+    //  console.log("下一張是"+$(".pos").eq(_this).text(),_this);
+    ani(_this);
+  })
 
-  function ani() {
+  function ani(next) {
     now = $(".pos:visible").index();
-    next = (now + 1 <= $(".pos").length - 1) ? now + 1 : 0;
+    if (typeof(next) == 'undefined') {
+      next = (now + 1 <= $(".pos").length - 1) ? now + 1 : 0;
+    }
     let AniType = $('.pos').eq(next).data('ani');
     //console.log("now=>"+now+','+"next=>"+next+","+"ani=>"+AniType);
     switch (AniType) {
@@ -152,17 +159,27 @@
         });
         break;
       case 2:
-        $(".pos").eq(now).hide(1000, () => {
-          $(".pos").eq(next).show(1000);
-        });
-        break;
-      case 3:
         $(".pos").eq(now).slideUp(1000, () => {
           $(".pos").eq(next).slideDown(1000);
         });
         break;
+      case 3:
+        $(".pos").eq(now).hide(1000, () => {
+          $(".pos").eq(next).show(1000);
+        });
+        break;
     }
   }
+  $(".btns").hover(
+    function() {
+      clearInterval(counter)
+    },
+    function() {
+      counter = setInterval(() => {
+        ani();
+      }, 3000);
+    }
+  )
 </script>
 <div class="half">
   <h1>院線片清單</h1>
