@@ -69,7 +69,7 @@ class DB{
     }
     return $this->pdo->exec($sql);
   }
-  public function count(...$arg){dd($arg);return $this->math('count',...$arg);}
+  public function count(...$arg){return $this->math('count',...$arg);}
   public function sum($col,...$arg){return $this->math('sum',$col,...$arg);}
   public function max($col,...$arg){return $this->math('max',$col,...$arg);}
   public function min($col,...$arg){return $this->math('min',$col,...$arg);}
