@@ -8,9 +8,14 @@
   .pos {
     width: 210px;
     height: 280px;
-    background-color: white;
+    /* background-color: white; */
     margin: auto;
-    position: relative;
+    position: absolute;
+  }
+
+  .pos img {
+    width: 100%;
+    height: 260px;
   }
 
   .controls {
@@ -21,17 +26,17 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
   }
 
-  .left,
-  .right {
+  .left,.right {
     /*   width:40px;
   height:40px; */
     /*   background-color: red; */
   }
 
-  .left,
-  .right {
+  .left,.right {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
   }
@@ -48,6 +53,18 @@
     width: 320px;
     background: green;
     height: 100px;
+    display: flex;
+  }
+
+  .btn {
+    width: 80px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .btn img {
+    width: 100%;
+    height: 80px;
   }
 </style>
 <div class="half" style="vertical-align:top;">
@@ -55,13 +72,32 @@
   <div class="rb tab" style="width:95%;">
     <div id="poster">
       <div class="lists">
-        <div class='pos'>
-          <img src="" alt="">
-        </div>
+        <?php
+        $posters = $Trailer->all(['sh' => 1]);
+        foreach ($posters as $poster) {
+        ?>
+          <div class='pos'>
+            <img src="./upload/<?= $poster['img']; ?>" alt="">
+            <div><?= $poster['name']; ?></div>
+          </div>
+        <?php
+        }
+        ?>
       </div>
       <div class="controls">
         <div class='left'></div>
-        <div class='btns'></div>
+        <div class='btns'>
+          <?php
+          foreach ($posters as $poster) {
+          ?>
+            <div class="btn">
+              <img src="./upload/<?= $poster['img']; ?>" alt="">
+              <div><?= $poster['name']; ?></div>
+            </div>
+          <?php
+          }
+          ?>
+        </div>
         <div class='right'></div>
       </div>
     </div>
@@ -76,7 +112,7 @@
       $ondate = date("Y-m-d", strtotime("-2 days"));
       ///$rows=$Movie->all(['sh'=>1]," && `ondate` >= '$ondate' && `ondate` <= '$today' order by `rank`");
       // $all = q("select count(*) as 'total' from `movie` where `sh`=1 && `ondate` between '$ondate' AND '$today'")[0]['total'];
-      $all=$Movie->count(" where `sh`=1 && `ondate` between '$ondate' AND '$today'");
+      $all = $Movie->count(" where `sh`=1 && `ondate` between '$ondate' AND '$today'");
       $div = 4;
       $pages = ceil($all / $div);
       $now = $_GET['p'] ?? 1;
