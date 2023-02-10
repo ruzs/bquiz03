@@ -1,5 +1,5 @@
 <?php include_once "base.php";
-$bookings = [3, 6, 18, 19, 11, 14];
+$bookings = [];
 ?>
 <style>
   #block {
@@ -51,7 +51,6 @@ $bookings = [3, 6, 18, 19, 11, 14];
     <?php
     for ($i = 0; $i < 20; $i++) {
       if (in_array($i, $bookings)) {
-
         echo "<div class='booking-seat'>";
       } else {
         echo "<div class='null-seat'>";
@@ -60,7 +59,7 @@ $bookings = [3, 6, 18, 19, 11, 14];
       echo (floor($i / 5) + 1) . "排" . ($i % 5 + 1) . "號";
       echo "</div>";
       if (!in_array($i, $bookings)) {
-        echo "<input type='checkbox' value='$i'>";
+        echo "<input class='chk' type='checkbox' value='$i'>";
       }
       echo "</div>";
     }
@@ -78,5 +77,20 @@ $bookings = [3, 6, 18, 19, 11, 14];
   </div>
 </div>
 <script>
-  $
+  let seats = [];
+  $(".chk").on("change", function() {
+    if ($(this).prop('checked')) {
+      //劃位
+      if (seats.length >= 4) {
+        alert("最多只能購買四張票");
+        $(this).prop('checked', false)
+      } else {
+        seats.push($(this).val())
+      }
+    } else {
+      //取消劃位
+      seats.splice(seats.indexOf($(this).val()), 1)
+    }
+    ///console.log(seats)
+  })
 </script>
