@@ -9,8 +9,9 @@
     width: 210px;
     height: 280px;
     /* background-color: white; */
-    margin: auto;
+    margin-left: 105px; /*讓海報維持在中間 */
     position: absolute;
+    text-align: center;
   }
 
   .pos img {
@@ -21,7 +22,7 @@
   .controls {
     width: 420px;
     height: 110px;
-    background-color: lightblue;
+    /* background-color: lightblue; */
     margin: 10px auto 0 auto;
     display: flex;
     align-items: center;
@@ -31,18 +32,12 @@
   }
 
   .left,.right {
-    /*   width:40px;
-  height:40px; */
-    /*   background-color: red; */
-  }
-
-  .left,.right {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
   }
 
   .left {
-    border-right: 20px solid green;
+    border-right: 20px solid blue;
   }
 
   .right {
@@ -51,15 +46,19 @@
 
   .btns {
     width: 320px;
-    background: green;
+    /* background: green; */
     height: 100px;
     display: flex;
+    overflow: hidden; /*讓超過四個元件寬度的其他內容隱蔵 */
   }
 
   .btn {
     width: 80px;
     font-size: 12px;
     text-align: center;
+    flex-shrink: 0;   /*讓子元素維持自己的寬度 */
+  box-sizing: border-box;  /*讓元件總寬度不受padding影嚮 */
+    padding:3px;
   }
 
   .btn img {
