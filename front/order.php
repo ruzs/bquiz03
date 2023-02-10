@@ -43,7 +43,7 @@
     $.get("./api/get_booking.php",{},(booking)=>{
             $("#booking").html(booking)
             $("#selectMovie").text($("#movie option:selected").text())
-            $("#selectDate").text($("#day option:selected").text())
+            $("#selectDate").text($("#day option:selected").val())
             $("#selectSession").text($("#session option:selected").val())
         })
 }
