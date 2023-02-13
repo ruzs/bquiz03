@@ -129,4 +129,5 @@ function q($sql){
 
 $Trailer=new DB("trailer");
 $Movie=new DB("movie");
+$Order=new DB("orders");
 ?>
