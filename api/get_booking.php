@@ -1,5 +1,14 @@
 <?php include_once "base.php";
+$orders=$Order->all(['movie'=>$_GET['movie'],'date'=>$_GET['date'],'session'=>$_GET['session']]);
+//dd($_GET);
+//dd($orders);
+
 $bookings = [];
+
+foreach($orders as $order){
+  $seats=unserialize($order['seats']);
+  $bookings=array_merge($bookings,$seats);
+}
 ?>
 <style>
   #block {
