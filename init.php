@@ -30,9 +30,10 @@ for($i=1;$i<10;$i++){
 
 $date=['2023-02-11','2023-02-12','2023-02-13','2023-02-10','2023-02-14'];
 
-
+$max_id=$Order->max('id')+1;
 for($i=1;$i<10;$i++){
     $data=[];
+    $data['num']=date('Ymd') . sprintf("%04d",$max_id+$i-1);
     $data['movie']="院線片".$i;
     $data['date']=$date[rand(0,4)];
     $data['session']=$Order->session[rand(1,5)];
@@ -41,5 +42,6 @@ for($i=1;$i<10;$i++){
         $data['seats'][]=rand(0,19);
     }
     $data['seats']=serialize($data['seats']);
+
     $Order->save($data);
 }
