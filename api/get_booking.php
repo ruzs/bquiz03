@@ -101,6 +101,7 @@ $bookings = [];
                               session:$("#session option:selected").val()},
                 (result)=>{
                     console.log(result)
+                    $("#booking").html(result)
                 }
             )
 }
