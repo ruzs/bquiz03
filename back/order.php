@@ -12,7 +12,7 @@
     }
     ?>
   </select>
-  <button>刪除</button>
+  <button onclick="qDel()">刪除</button>
 </div>
 <div style="display:flex;width:98%;margin:auto;justify-content:space-between">
 
@@ -68,23 +68,38 @@
       </div>
       <div style="width:14%;text-align:center">
         <button onclick="del('Order',<?= $order['id']; ?>,'你確定要刪除<?= $order['date'] . ' ' . $order['movie'] . '的訂單資料嗎?'; ?>')">刪除</button>
-
       </div>
-
     </div>
-
     <hr>
-
   <?php
+  }
+  ?>
+</div>
+
+<script>
+  function qDel() {
+
+    let type = $("input[name='type']:checked").val();
+    let value;
+    switch (type) {
+      case 'date':
+        value = $("#date").val();
+        break;
+      case 'movie':
+        value = $("#movie").val();
+        break;
+    }
+
+    let chk = confirm(`您確定要刪除${value}的所有訂單嗎?`);
+
+    if (chk) {
+      $.post("./api/qDel.php", {
+        type,
+        value
+      }, () => {
+        location.reload();
+      })
+    }
 
   }
-
-  ?>
-
-
-
-
-
-
-
-</div>
+</script>
