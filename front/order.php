@@ -66,18 +66,13 @@
       })
     }
     function getDays(id) {
-      $.get("./api/get_days.php", {
-        id
-      }, (days) => {
+      $.get("./api/get_days.php", {id}, (days) => {
         $("#day").html(days);
         getSessions(id, $("#day").val())
       })
     }
     function getSessions(id, date) {
-      $.get("./api/get_sessions.php", {
-        id,
-        date
-      }, (sessions) => {
+      $.get("./api/get_sessions.php", {id,date}, (sessions) => {
         $("#session").html(sessions);
       })
     }
